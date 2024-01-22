@@ -1,2 +1,63 @@
 ## Filterung aufbauen und per Shortcode integrieren
 
+### Shortcode bauen
+
+Wir wechseln in die `includes/register_shortcode.php` Datei und fügen eine neue Funktion hinzu:
+
+```
+function movie_filter_func($atts) {
+
+    $attributes = shortcode_atts(
+        array(
+            'taxonomies' => 'genre,schauspieler',
+        ),
+        $atts,
+        'movie_filter'
+    );
+
+    $taxonomies = explode(',', $attributes['taxonomies']);
+
+    $content = '<form id="filter" action="#" method="post">';
+
+        if( !empty($taxonomies) ) {
+            foreach ($taxonomies as $taxonomy) {
+                // Frage alle verfügbaren Begriffe der angegebenen Taxonomie ab
+                $terms = get_terms($taxonomy);
+                if( !is_wp_error($terms) ) {
+                    $content .= '<select class="taxonomy-filter" id="' . esc_attr($taxonomy) . '" name="' . esc_attr($taxonomy) . '">';
+                        $content .= '<option value="">Alle</option>';
+
+                        foreach ($terms as $term) {
+                            $content .= '<option value="' . esc_attr($term->slug) . '">' . esc_html($term->name) . '</option>';
+                        }
+
+                    $content .= '</select>';
+                }
+            }
+        }
+
+        $content .= '<input type="text" id="titel" name="titel" placeholder="Titel suchen">';
+        $content .= '<input type="submit" id="apply_filters" name="apply_filters" value="Filter anwenden" />';
+
+        $content .= '<select id="sort" name="sort">';
+            $content .= '<option value="ASC">Erscheinungsdatum alt -> neu</option>';
+            $content .= '<option value="DESC">Erscheinungsdatum neu -> alt</option>';
+        $content .= '</select>';
+
+    $content .= '</form>';
+    $content .= '<div id="ergebnisse"></div>';
+
+    return $content;
+    
+}
+
+add_shortcode('movie_filter', 'movie_filter_func');
+```
+
+
+
+
+
+### Enqueue Scripts anpassen
+
+Wir möchten unser CSS & JS nur laden, wenn `the_conten()` auch den Shortcode

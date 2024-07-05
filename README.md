@@ -35,14 +35,6 @@ unterschiedlichen Taxonomien  und Eingabefeldern hinzugefügt.**
 - Einbinden eigener CSS und Javascript Dateien aus dem Plugin heraus mit wp_enqueue_style und wp_enqueue_script
 - Ausgabe der Filme direkt im Childtheme
 - Aufbauen einer kleinen Filterung - Erklärung und Anwendung von Nonces
-
-**Tagesziel: wir haben in unserer Videotheke einige Filme eingefügt und eine Ausgabe erstellt die über mehrere Wege angezeigt werden kann. (Stichwort Updatefähigkeit) Wir kennen WordPress Funktionen zum Einbinden eigener CSS und JS Dateien und haben eine recht simple Filterung gebaut.**
-
-##  TAG 3
-
-**Schwerpunkte: Backend, Benutzerverwaltung & eigene SQL Anfragen in WordPress**
-
-*Ganztägig:*
 - Benutzerrollenverwaltung in WordPress erklären & kurz Pluginvorstellung zur Vereinfachung der Benutzerrechte und Kompetenzen
 - Anpassen unserer Custom Post Types und Taxonomies sodass nur Benutzer mit gewissen Kompetenzen (Capabilities) sie bearbeiten können
 - Erstellen eigener Setting-Seiten im Adminbereich (Backend)
@@ -53,18 +45,8 @@ unterschiedlichen Taxonomien  und Eingabefeldern hinzugefügt.**
 	- Verarbeiten der Ergebnisse
 - Error-Handling in WordPress
 	- Debug Mode, Logging Methoden und "Best practices"
-
-**Tagesziel: wir haben die Benutzerrollenverwaltung kennengelernt und sie in unserem Plugin angewandt. Zusätzlich haben wir noch eine Einstellungsseite für unser Plugin angelegt und kennen nun die Grundlagen für eigene Datenbankabfragen und wissen wie wir ein "kaputtes WordPress" wieder reparieren können.**
-
-##  TAG 4 
-
-**Schwerpunkte: (eventuell noch nicht abgeschlossene Punkte der Vortage beenden). Internationalisierung des Plugins. Nützliche Plugins vorstellen, Austausch über eigene Erfahrungswerte, eingehen auf Praxisbeispiele der Teilnehmer.**
-
-*Ganztägig*
 - WordPress Funktionen für die Internationalisierung vorstellen
-- Übersetzungen mit MO/PO Files anlegen (anhand eines Zusatzplugins)
-- weitere nützliche Plugins vorstellen
-- Eingehen auf Fragen, Anregungen, Wünsche & Praxisbeispiele der Teilnehmer
-- Austausch über eigene Erfahrungswerte 
+
+**Tagesziel: wir haben in unserer Videotheke einige Filme eingefügt und eine Ausgabe erstellt die über mehrere Wege angezeigt werden kann. (Stichwort Updatefähigkeit) Wir kennen WordPress Funktionen zum Einbinden eigener CSS und JS Dateien und haben anhand der gelernten Schwerpunkte eine recht simple Filterung gebaut.**
 
 

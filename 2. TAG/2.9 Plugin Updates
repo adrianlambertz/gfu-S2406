@@ -1,0 +1,69 @@
+## Plugin Updates
+
+Seit WordPress 5.8 gibt es einen zusätzlichen Plugin Header namens "Plugin URI". Ist dieser gesetzt und führt nicht zum WordPress Plugin Repo wird WordPress nicht mehr versuchen das Plugin aus dem offizielken Repo zu aktualisieren.
+
+Zusätzlich wurden neue Filter eingefügt, mit denen die Plugin URI selber abgefragt werden können:
+
+```
+/*
+Plugin Name:  GFU Plugin
+Plugin URI:   https://gfu.de
+Update URI:   https://tn4.pixelbar.be/current.json
+Description:  Unser kleines Plugin
+Version:      1.0.1
+Author:       Adrian Lambertz
+License:      GPL2
+License URI:  https://www.gnu.org/licenses/gpl-2.0.html
+Text Domain:  gfu-plugin
+Domain Path:  /languages
+*/
+```
+
+
+
+# Filter
+
+```
+/**
+ * Fuege eigene abfrage zu einer json datei hinzu in der alle metadaten einer neuen plugin version stehen
+ */
+add_filter('update_plugins_tn4.pixelbar.be', function( $update, $plugin_data, $plugin_file, $locales){
+        if ($plugin_file == GFU_PLUGIN_NAME) {
+                $request = wp_remote_get($plugin_data['UpdateURI']);
+                $request_body = wp_remote_retrieve_body( $request );
+                $update = json_decode( $request_body, true );
+        }
+        return $update;
+},10, 4);
+```
+
+```
+/**
+ * Passe URL "details ansehen" an
+ */
+add_filter('plugin_row_meta', function($plugin_meta, $plugin_file, $plugin_data) {
+        if ( $plugin_file == GFU_PLUGIN_NAME && current_user_can( 'install_plugins' ) ) {
+                /*
+                Currently, "View details" is only visible to those that can install plugins.
+                Those that can't, they have the "Visit plugin site" already.
+                 */
+                $plugin_meta[2] = sprintf('<a href="%s" aria-label="%s">%s</a>',
+                        $plugin_data['PluginURI'],
+                        sprintf( __( 'Visit plugin site for %s' ), $plugin_data['Name'] ),
+                        __( 'Visit plugin site' )
+                );
+        }
+
+        return $plugin_meta;
+}, 10, 3 );
+```
+
+# current.json
+```
+{
+        "version": "1.0.1",
+        "slug": "update-test",
+        "tested": "6.3.2",
+        "package": "https://tn4.pixelbar.be/gfu-1.0.2.zip"
+}
+```
